@@ -22,7 +22,11 @@ import type {
   StorySubmission,
 } from "@/lib/types";
 
-const LOCAL_DB_PATH = path.join(process.cwd(), "data", "pedalpol-db.json");
+const LOCAL_DB_PATH = process.env.VERCEL
+  ? path.join("/tmp", "pedalpol-db.json")
+  : path.join(process.cwd(), "data", "pedalpol-db.json");
+
+let memoryFallbackDb: DatabaseState | null = null;
 
 function cloneSeed(): DatabaseState {
   return JSON.parse(JSON.stringify(INITIAL_DB)) as DatabaseState;
@@ -31,19 +35,28 @@ function cloneSeed(): DatabaseState {
 async function readLocalDb(): Promise<DatabaseState> {
   try {
     const raw = await fs.readFile(LOCAL_DB_PATH, "utf8");
-    return JSON.parse(raw) as DatabaseState;
+    const parsed = JSON.parse(raw) as DatabaseState;
+    memoryFallbackDb = parsed;
+    return parsed;
   } catch {
+    if (memoryFallbackDb) return memoryFallbackDb;
     const fresh = cloneSeed();
-    await writeLocalDb(fresh);
+    memoryFallbackDb = fresh;
+    await writeLocalDb(fresh).catch(() => {});
     return fresh;
   }
 }
 
 async function writeLocalDb(db: DatabaseState): Promise<void> {
-  await fs.mkdir(path.dirname(LOCAL_DB_PATH), { recursive: true });
-  const tmp = `${LOCAL_DB_PATH}.${crypto.randomBytes(4).toString("hex")}.tmp`;
-  await fs.writeFile(tmp, JSON.stringify(db, null, 2), "utf8");
-  await fs.rename(tmp, LOCAL_DB_PATH);
+  memoryFallbackDb = db;
+  try {
+    await fs.mkdir(path.dirname(LOCAL_DB_PATH), { recursive: true });
+    const tmp = `${LOCAL_DB_PATH}.${crypto.randomBytes(4).toString("hex")}.tmp`;
+    await fs.writeFile(tmp, JSON.stringify(db, null, 2), "utf8");
+    await fs.rename(tmp, LOCAL_DB_PATH);
+  } catch {
+    // Serverless read-only fallback: keep state in memoryFallbackDb
+  }
 }
 
 export function getStorageMode(): "supabase" | "local" {

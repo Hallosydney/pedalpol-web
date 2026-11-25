@@ -62,6 +62,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ url: data.publicUrl, storage: "supabase" }, { status: 201 });
   }
 
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      {
+        error:
+          "Upload file langsung di Vercel butuh konfigurasi Supabase Storage (isi NEXT_PUBLIC_SUPABASE_URL & SUPABASE_SERVICE_ROLE_KEY), atau tempel URL gambar/video.",
+      },
+      { status: 400 }
+    );
+  }
+
   const uploadsDir = path.join(process.cwd(), "public", "uploads");
   await fs.mkdir(uploadsDir, { recursive: true });
   await fs.writeFile(path.join(uploadsDir, fileName), buffer);
