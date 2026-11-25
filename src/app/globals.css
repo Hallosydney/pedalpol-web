@@ -1,26 +1,412 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --pp-paper: #f5f0e6;
+  --pp-paper-deep: #ebe3d3;
+  --pp-ink: #14101c;
+  --pp-purple: #8e47ee;
+  --pp-purple-deep: #6c2bd9;
+  --pp-lime: #92fa66;
+  --pp-lime-soft: #c6ff8e;
+  --pp-forest: #176b3f;
+  --pp-forest-bright: #2cc46c;
+  --pp-coral: #ff5b37;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--pp-paper);
+  --color-foreground: var(--pp-ink);
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--pp-paper);
+  color: var(--pp-ink);
+  font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Risograph paper grain */
+.riso-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.halftone-corner {
+  background-image: radial-gradient(rgba(20, 16, 28, 0.14) 1.25px, transparent 1.25px);
+  background-size: 9px 9px;
+}
+
+.halftone-lime {
+  background-image: radial-gradient(rgba(146, 250, 102, 0.22) 1.3px, transparent 1.3px);
+  background-size: 10px 10px;
+}
+
+.font-poster {
+  font-family: var(--font-anton), Impact, "Arial Black", sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+}
+
+.font-editorial {
+  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+}
+
+.font-stamp {
+  font-family: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.03em;
+}
+
+.riso-shadow {
+  box-shadow: 5px 5px 0 var(--pp-ink);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.riso-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--pp-ink);
+}
+
+.riso-shadow-lime {
+  box-shadow: 6px 6px 0 var(--pp-lime);
+}
+
+.riso-shadow-purple {
+  box-shadow: 6px 6px 0 var(--pp-purple);
+}
+
+/* Kinetic Marquee */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Draggable stickers */
+.sticker-item {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: filter 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(3px 5px 0 rgba(20, 16, 28, 0.28));
+}
+
+.sticker-item:hover {
+  filter: drop-shadow(5px 9px 0 rgba(20, 16, 28, 0.35));
+  z-index: 30;
+}
+
+.sticker-item.is-dragging {
+  cursor: grabbing;
+  transition: none;
+  filter: drop-shadow(10px 14px 0 rgba(20, 16, 28, 0.4));
+  z-index: 40;
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-7px) rotate(calc(var(--rot, 0deg) + 1.8deg));
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4.8s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: floatSlow 5.6s ease-in-out 1.1s infinite;
+}
+
+@keyframes treeGrow {
+  0% {
+    transform: scale(0) translateY(16px);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12) translateY(-3px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.tree-pop {
+  animation: treeGrow 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: bottom center;
+}
+
+@keyframes dashRide {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.road-dash {
+  animation: dashRide 3.2s linear infinite;
+}
+
+.bike-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Kinetic Chain Link Animation */
+@keyframes chainMove {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+.chain-link {
+  animation: chainMove 1.8s linear infinite;
+}
+
+/* Culture-Art 3D Poster Tilt & Risograph Foil Sheen */
+.art-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.art-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(146, 250, 102, 0.24),
+    transparent 58%
+  );
+  mix-blend-mode: multiply;
+}
+
+.art-tilt:hover::after {
+  opacity: 1;
+}
+
+/* 35mm Contact Sheet, Filmstrip & Camcorder Culture-Art */
+.film-sprockets {
+  height: 14px;
+  background-color: #14101c;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 10px,
+    #f5f0e6 10px 22px,
+    transparent 22px 34px
+  );
+  background-size: 34px 8px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.9;
+}
+
+@keyframes filmRoll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.film-reel-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  animation: filmRoll 38s linear infinite;
+}
+
+.film-reel-wrap:hover .film-reel-track {
+  animation-play-state: paused;
+}
+
+.zine-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 68px;
+  height: 20px;
+  background: rgba(146, 250, 102, 0.84);
+  border: 1.5px solid #14101c;
+  transform: translateX(-50%) rotate(var(--tape-rot, -2.5deg));
+  z-index: 15;
+  pointer-events: none;
+  box-shadow: 2px 2px 0 rgba(20, 16, 28, 0.2);
+}
+
+.zine-tape.tape-paper {
+  background: rgba(235, 227, 211, 0.94);
+}
+
+.zine-photo-card {
+  transform: rotate(var(--card-tilt, 0deg));
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.zine-photo-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+  z-index: 10;
+}
+
+.zine-photo-img {
+  filter: contrast(1.05) saturate(0.92) sepia(0.04);
+  transition: filter 0.32s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.zine-photo-card:hover .zine-photo-img,
+.film-frame-btn:hover .zine-photo-img {
+  filter: contrast(1.03) saturate(1.08) sepia(0);
+  transform: scale(1.04);
+}
+
+.date-stamp {
+  font-family: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #ff7a3d;
+  text-shadow: 0 0 6px rgba(255, 91, 55, 0.72), 1px 1px 0 rgba(20, 16, 28, 0.9);
+  letter-spacing: 0.08em;
+}
+
+@keyframes recBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.18;
+  }
+}
+
+.rec-blink {
+  animation: recBlink 1.1s linear infinite;
+}
+
+.cam-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(20, 16, 28, 0.14) 0px,
+    rgba(20, 16, 28, 0.14) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+@keyframes shutterPop {
+  0% {
+    opacity: 0.68;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.shutter-flashing {
+  animation: shutterPop 0.22s ease-out forwards;
+}
+
+/* Subtle Art Ink Cursor Dot (desktop fine pointer only) */
+#ink-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  border: 2px solid var(--pp-ink);
+  background: var(--pp-lime);
+  pointer-events: none;
+  z-index: 95;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+#ink-cursor.is-active {
+  width: 26px;
+  height: 26px;
+  background: rgba(142, 71, 238, 0.32);
+  border-color: var(--pp-purple);
+}
+
+/* Calm Motion & Reduced Motion Respect */
+body.calm-motion .marquee-track,
+body.calm-motion .animate-float,
+body.calm-motion .animate-float-delay,
+body.calm-motion .road-dash,
+body.calm-motion .chain-link,
+body.calm-motion .film-reel-track,
+body.calm-motion .rec-blink,
+body.calm-motion .shutter-flashing {
+  animation: none !important;
+}
+
+body.calm-motion .film-reel-wrap {
+  overflow-x: auto;
+}
+
+body.calm-motion #ink-cursor {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-float,
+  .animate-float-delay,
+  .road-dash,
+  .chain-link,
+  .film-reel-track,
+  .rec-blink {
+    animation: none !important;
+  }
+  .film-reel-wrap {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .zine-photo-card {
+    transform: none !important;
+  }
 }
