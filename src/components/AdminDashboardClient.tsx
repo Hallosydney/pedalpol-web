@@ -534,7 +534,7 @@ export function AdminDashboardClient({
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {toast && (
-        <div className="fixed bottom-5 right-5 z-[140] px-4 py-3 bg-[#14101C] text-[#92FA66] border-2 border-[#92FA66] riso-shadow font-stamp text-xs font-bold">
+        <div className="fixed bottom-24 md:bottom-5 right-4 md:right-5 z-[140] px-4 py-3 bg-[#14101C] text-[#92FA66] border-2 border-[#92FA66] riso-shadow font-stamp text-xs font-bold">
           {toast}
         </div>
       )}

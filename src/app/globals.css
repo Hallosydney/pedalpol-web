@@ -370,6 +370,50 @@ body {
   border-color: var(--pp-purple);
 }
 
+/* Mobile Street-Art Zine Drawer & Handlebar Dock */
+@keyframes drawerDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticketStamp {
+  0% {
+    opacity: 0;
+    transform: translateX(-14px) rotate(-1.2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes wheelSlowSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mobile-drawer-enter {
+  animation: drawerDrop 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.mobile-ticket-in {
+  animation: ticketStamp 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.drawer-wheel-spin {
+  animation: wheelSlowSpin 28s linear infinite;
+}
+
 /* Calm Motion & Reduced Motion Respect */
 body.calm-motion .marquee-track,
 body.calm-motion .animate-float,
@@ -378,7 +422,10 @@ body.calm-motion .road-dash,
 body.calm-motion .chain-link,
 body.calm-motion .film-reel-track,
 body.calm-motion .rec-blink,
-body.calm-motion .shutter-flashing {
+body.calm-motion .shutter-flashing,
+body.calm-motion .mobile-drawer-enter,
+body.calm-motion .mobile-ticket-in,
+body.calm-motion .drawer-wheel-spin {
   animation: none !important;
 }
 
@@ -397,7 +444,10 @@ body.calm-motion #ink-cursor {
   .road-dash,
   .chain-link,
   .film-reel-track,
-  .rec-blink {
+  .rec-blink,
+  .mobile-drawer-enter,
+  .mobile-ticket-in,
+  .drawer-wheel-spin {
     animation: none !important;
   }
   .film-reel-wrap {

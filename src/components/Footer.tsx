@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="bg-[#14101C] text-[#F5F0E6] border-t-2 border-[#92FA66] mt-auto">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-9 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-9 pb-24 md:pb-9 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
           <div className="font-poster text-3xl text-[#92FA66] uppercase tracking-wide">
             PEDAL POL

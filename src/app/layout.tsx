@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Anton, Newsreader, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
@@ -33,19 +33,31 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://pedalpol.id");
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#14101C",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "PEDAL POL — Zine, Agenda & Komunitas Sepeda | Menteng, Jakarta",
     template: "%s | PEDAL POL",
   },
   description:
-    "PedalPol (@pedalpol) — Komunitas sepeda lintas genre (Fixie, Gravel, Road Bike, Commuter 26\") berbasis di Menteng, Jakarta Pusat. Zine cerita jalan, agenda gowes, merch, kampanye For Rest Forest, dan kolaborasi 3 komunitas.",
+    'PedalPol (@pedalpol) — Komunitas sepeda lintas genre (Fixie, Gravel, Road Bike, Commuter 26") berbasis di Menteng, Jakarta Pusat. Zine cerita jalan, agenda gowes, merch, kampanye For Rest Forest, dan kolaborasi 3 komunitas.',
   openGraph: {
     title: "PEDAL POL — Zine & Komunitas Sepeda Menteng, Jakarta",
     description:
       "Budak Korporat yang Melarikan Diri Lewat Jalur Sepeda. Aliansi @pedalpol × @bikebaik.dijalan × @bike2ngonten.",
     type: "website",
     locale: "id_ID",
+    images: [{ url: "/media/skyline-bikes.webp", width: 1200, height: 900, alt: "PedalPol Jakarta Cycling Community" }],
   },
 };
 
