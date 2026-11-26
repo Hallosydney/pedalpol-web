@@ -146,7 +146,7 @@ export function MerchClient({
           <span className="text-[#362F42]">
             {" "}
             Pilih ukuran &amp; jumlah → klik pesan untuk langsung membuka chat WhatsApp admin
-            PedalPol (bisa ambil langsung saat Rabo-Rabo / Sunday Morning Pol atau kirim kurir).
+            PedalPol (bisa ambil langsung saat Raboo-Raboo / Sunday Morning Pol atau kirim kurir).
           </span>
         </div>
         <span className="shrink-0 px-3 py-1.5 bg-[#92FA66] border border-[#14101C] font-bold uppercase">

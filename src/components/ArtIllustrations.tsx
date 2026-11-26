@@ -135,7 +135,7 @@ export function ArticleCoverArt({
             fontSize="28"
             letterSpacing="1"
           >
-            RABO-RABO // 20:00 WIB
+            RABOO-RABOO // 20:00 WIB
           </text>
         </svg>
       );
@@ -190,34 +190,34 @@ export function MerchCoverArt({
           <rect width="360" height="220" fill="#92FA66" />
           <path d="M 132,76 C 132,26 228,26 228,76" fill="none" stroke="#14101C" strokeWidth="6" />
           <rect x="108" y="76" width="144" height="118" fill="#F5F0E6" stroke="#14101C" strokeWidth="4" />
-          <polygon points="122,126 232,114 238,144 128,156" fill="#8E47EE" stroke="#14101C" strokeWidth="3" />
-          <text
-            x="180"
-            y="142"
-            textAnchor="middle"
-            fontFamily="Impact, sans-serif"
-            fontSize="19"
-            fill="#92FA66"
-            transform="rotate(-6 180 142)"
-          >
-            PEDAL POL
-          </text>
+          <image
+            href="/logos/pedalpol-logo.webp"
+            x="118"
+            y="108"
+            width="124"
+            height="50"
+            preserveAspectRatio="xMidYMid meet"
+          />
         </svg>
       );
     case "sticker-pack":
       return (
         <svg viewBox="0 0 360 220" className="w-full h-full block" aria-hidden="true">
           <rect width="360" height="220" fill="#EBE3D3" />
-          <g transform="translate(48, 36) rotate(-8)">
-            <polygon points="8,14 146,6 158,36 28,54" fill="#8E47EE" stroke="#14101C" strokeWidth="3.5" />
-            <text x="82" y="36" textAnchor="middle" fontFamily="Impact, sans-serif" fontSize="22" fill="#92FA66">
-              PEDAL POL
-            </text>
+          <g transform="translate(36, 26) rotate(-5)">
+            <image
+              href="/logos/pedalpol-logo.webp"
+              x="0"
+              y="0"
+              width="172"
+              height="68"
+              preserveAspectRatio="xMidYMid meet"
+            />
           </g>
           <g transform="translate(182, 114) rotate(7)">
             <rect x="0" y="0" width="128" height="46" fill="#14101C" stroke="#FFFFFF" strokeWidth="3" />
             <text x="64" y="22" textAnchor="middle" fontFamily="monospace" fontSize="12" fontWeight="bold" fill="#92FA66">
-              ★ RABO-RABO
+              ★ RABOO-RABOO
             </text>
             <text x="64" y="37" textAnchor="middle" fontFamily="monospace" fontSize="9" fill="#F5F0E6">
               MENTENG JKT

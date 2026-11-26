@@ -5,9 +5,11 @@ export function Footer() {
     <footer className="bg-[#14101C] text-[#F5F0E6] border-t-2 border-[#92FA66] mt-auto">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-9 pb-24 md:pb-9 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <div className="font-poster text-3xl text-[#92FA66] uppercase tracking-wide">
-            PEDAL POL
-          </div>
+          <img
+            src="/logos/pedalpol-logo.webp"
+            alt="PEDAL POL"
+            className="h-10 w-auto object-contain mb-1.5"
+          />
           <p className="font-stamp text-xs text-[#BEB5CA] mt-1">
             Menteng, Jakarta Pusat • Budak Korporat yang Melarikan Diri Lewat Jalur Sepeda.
           </p>

@@ -94,7 +94,7 @@ export function KolabClient({ docCount }: { docCount: number }) {
           {[
             { num: "3", title: "Komunitas Gandeng", sub: "Cross-cycling & creator" },
             { num: "200+", title: "Gabungan Anggota Aktif", sub: "Urban professionals JKT" },
-            { num: "4+", title: "Agenda Rutin / Minggu", sub: "Rabo, Sabtu, Minggu, Ngelayap" },
+            { num: "4+", title: "Agenda Rutin / Minggu", sub: "Raboo-Raboo, Sabtu, Minggu, Ngelayap" },
             { num: "100%", title: "All-Bike & Organik", sub: 'Fixie • Gravel • Road • 26"' },
           ].map((m) => (
             <div
@@ -135,7 +135,7 @@ export function KolabClient({ docCount }: { docCount: number }) {
                   <img
                     src="/logos/pedalpol.webp"
                     alt="Logo PedalPol"
-                    className="w-16 h-16 object-cover border-2 border-[#14101C] bg-[#8E47EE]"
+                    className="w-16 h-16 object-cover border-2 border-[#14101C] bg-[#14101C]"
                   />
                   <span className="font-stamp text-[10px] font-bold uppercase px-2 py-1 bg-[#8E47EE] text-white border border-[#14101C]">
                     01 / COMMUNITY CORE
@@ -152,7 +152,7 @@ export function KolabClient({ docCount }: { docCount: number }) {
                 </a>
                 <p className="text-xs text-[#362F42] leading-relaxed">
                   Basis Menteng lintas sepeda (Fixie, Gravel, Road, Commuter 26&quot;). Motor{" "}
-                  <em>Rabo-Rabo</em>, <em>Sporty Edition</em>, <em>Sunday Morning Pol</em>,{" "}
+                  <em>Raboo-Raboo</em>, <em>Sporty Edition</em>, <em>Sunday Morning Pol</em>,{" "}
                   <em>Ngelayap</em> &amp; Zine.
                 </p>
               </div>

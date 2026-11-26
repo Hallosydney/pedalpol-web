@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Zine PedalPol & Contact Sheet Reels",
   description:
-    "Majalah indie komunitas sepeda PedalPol: cerita jalan Rabo-Rabo, catatan Ngelayap, Bike Check, Contact Sheet foto asli & Street Reels Sudirman.",
+    "Majalah indie komunitas sepeda PedalPol: cerita jalan Raboo-Raboo, catatan Ngelayap, Bike Check, Contact Sheet foto asli & Street Reels Sudirman.",
 };
 
 export default async function ZinePage() {

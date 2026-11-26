@@ -288,7 +288,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
                   KIRIM CERITA GOWESMU!
                 </h3>
                 <p className="text-sm text-[#362F42] mb-4">
-                  Punya cerita seru dari Rabo-Rabo, Ngelayap, atau kisah sepedamu yang bisa
+                  Punya cerita seru dari Raboo-Raboo, Ngelayap, atau kisah sepedamu yang bisa
                   menginspirasi pesepeda di Indonesia? Kirim langsung ke meja redaksi PedalPol.
                 </p>
                 {sfError && (
@@ -306,7 +306,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
                       type="text"
                       value={sfTitle}
                       onChange={(e) => setSfTitle(e.target.value)}
-                      placeholder="cth. Pertama Kali Ikut Rabo-Rabo Pakai Sepeda Lipat..."
+                      placeholder="cth. Pertama Kali Ikut Raboo-Raboo Pakai Sepeda Lipat..."
                       className="w-full px-3 py-2 bg-white border-2 border-[#14101C] text-sm"
                     />
                   </div>

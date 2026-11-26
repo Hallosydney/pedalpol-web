@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Agenda Gowes & Rute",
   description:
-    "Jadwal gowes Upcoming PedalPol (Rabo-Rabo, Sporty Edition, Sunday Morning Pol, Ngelayap), Join barisan tanpa login dengan Digital Ride Pass, Informasi Brosur dinamis, dan Archive Buletin.",
+    "Jadwal gowes Upcoming PedalPol (Raboo-Raboo, Sporty Edition, Sunday Morning Pol, Ngelayap), Join barisan tanpa login dengan Digital Ride Pass, Informasi Brosur dinamis, dan Archive Buletin.",
 };
 
 export default async function AgendaPage({

@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#14101C"/>
-  <polygon points="6,18 54,10 59,36 16,52 8,42" fill="#8E47EE" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
-  <text x="33" y="40" text-anchor="middle" fill="#92FA66" font-family="Impact, Arial Black, sans-serif" font-size="22" font-weight="900" transform="rotate(-9 33 36)">PP</text>
-</svg>

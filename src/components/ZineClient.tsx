@@ -41,7 +41,7 @@ export function ZineClient({
             ZINE PEDALPOL
           </h1>
           <p className="text-sm sm:text-base text-[#362F42] max-w-2xl mt-2.5">
-            Kumpulan catatan kecil habis <em>Rabo-Rabo</em>, liputan <em>Ngelayap</em>,
+            Kumpulan catatan kecil habis <em>Raboo-Raboo</em>, liputan <em>Ngelayap</em>,
             arsip kegiatan sebelumnya, cerita <em>Bike Check</em> member, hingga kolaborasi
             budaya &amp; alam—untuk menginspirasi semua kalangan pesepeda di Indonesia.
           </p>

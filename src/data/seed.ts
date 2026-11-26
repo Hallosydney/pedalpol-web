@@ -24,9 +24,9 @@ export const INITIAL_DB: DatabaseState = {
       id: "rabo-rabo",
       status: "upcoming",
       category: "rabo",
-      badge: "UPCOMING • RABO-RABO",
+      badge: "UPCOMING • RABOO-RABOO",
       dateBadge: "RABU, 25 NOV 2026",
-      title: "Rabo-Rabo Menteng Night Roll #42",
+      title: "Raboo-Raboo Menteng Night Roll #42",
       schedule: "Rabu, 25 Nov 2026 • 20:00 WIB",
       tikum: "Kawasan Menteng, Jakarta Pusat",
       distance: "25 KM",
@@ -45,7 +45,7 @@ export const INITIAL_DB: DatabaseState = {
         points: [
           "🛡 Road Captain & Sweeper (pace sosial, nggak ditinggal)",
           "📸 Foto candid & Reels malam bareng @bike2ngonten",
-          "🏷 Stiker die-cut Rabo-Rabo untuk peserta pertama kali",
+          "🏷 Stiker die-cut Raboo-Raboo untuk peserta pertama kali",
           "☕ Titik finish nongkrong & ngopi bareng di Menteng",
         ],
         giveback:
@@ -284,7 +284,7 @@ export const INITIAL_DB: DatabaseState = {
       dateBadge: "19 NOV 2026",
       ridersAttended: "64 Riders",
       zineSlug: "rabo-rabo-terapi",
-      title: "Rabo-Rabo #41: Malam Paling Rame di Menteng",
+      title: "Raboo-Raboo #41: Malam Paling Rame di Menteng",
       schedule: "Terlaksana • 19 Nov 2026",
       tikum: "Menteng → Sudirman → Warkop Finish",
       distance: "26 KM",
@@ -485,17 +485,17 @@ export const INITIAL_DB: DatabaseState = {
       distance: "26 KM",
       applause: 48,
       title:
-        "Pulang Rabo-Rabo Jam 11 Malam: Kenapa Jalur Sepeda Jadi Ruang Terapi Terbaik",
+        "Pulang Raboo-Raboo Jam 11 Malam: Kenapa Jalur Sepeda Jadi Ruang Terapi Terbaik",
       subtitle:
         "Laptop baru ditutup jam tujuh, macet masih mengular, tapi begitu roda menyentuh aspal Menteng, kepala langsung kosong dari urusan kantor.",
       excerpt:
-        "Inspirasi bikin website PedalPol aja muncul waktu kayuhan pulang Rabo-Rabo. Ini cerita kecil tentang kenapa gowes malam hari selalu bikin kita ketagihan balik lagi tiap Rabu.",
+        "Inspirasi bikin website PedalPol aja muncul waktu kayuhan pulang Raboo-Raboo. Ini cerita kecil tentang kenapa gowes malam hari selalu bikin kita ketagihan balik lagi tiap Rabu.",
       quote:
         "“Di jalur sepeda malam hari, nggak ada jabatan, nggak ada KPI—yang ada cuma ritme kayuhan, lampu belakang merah yang berbaris, dan tawa di warkop titik finish.”",
       coverKey: "rabo-rabo-terapi",
       paragraphs: [
         "Setiap hari Rabu jam delapan malam di kawasan Menteng, pemandangannya selalu seru untuk diperhatikan. Ada yang baru saja melepas ID card kantor dan langsung ganti sepatu flat buat naik Fixie, ada yang datang membawa Gravel dengan tas stang penuh camilan, ada juga teman-teman Road Bike yang masih semangat nge-loop.",
-        "Di PedalPol, kami tidak pernah memisahkan barisan berdasarkan jenis sepeda atau harga groupset. Justru momen terbaik dari Rabo-Rabo terjadi ketika semua sepeda melaju di pace santai yang sama—saling lempar kode tangan saat ada lubang jalan, menunggu di lampu merah, lalu berhenti ngopi bareng di titik finish.",
+        "Di PedalPol, kami tidak pernah memisahkan barisan berdasarkan jenis sepeda atau harga groupset. Justru momen terbaik dari Raboo-Raboo terjadi ketika semua sepeda melaju di pace santai yang sama—saling lempar kode tangan saat ada lubang jalan, menunggu di lampu merah, lalu berhenti ngopi bareng di titik finish.",
         "Sering kali ide-ide paling gila lahir di obrolan setelah gowes: mulai dari rencana Ngelayap ke luar kota, kolaborasi strolling bareng brand lokal, sampai ide membangun website jurnal ini supaya cerita-cerita kecil di jalan bisa dibaca dan menginspirasi pesepeda di kota lain.",
         "Kalau kamu masih ragu buat mulai gowes malam di kotamu, pesannya sederhana: pasang lampu depan-belakang, pakai helm, ajak dua atau tiga teman, dan kayuh pelan-pelan. Kadang obat stres paling murah memang cuma dua roda dan angin malam.",
       ],
@@ -576,7 +576,7 @@ export const INITIAL_DB: DatabaseState = {
       distance: "Daily Ride",
       applause: 39,
       title:
-        "Bike Check: Sepeda Fixie Rakitan Harian Penuh Stiker yang Nggak Pernah Absen Rabo-Rabo",
+        "Bike Check: Sepeda Fixie Rakitan Harian Penuh Stiker yang Nggak Pernah Absen Raboo-Raboo",
       subtitle:
         "Bukan soal spek termahal—tapi soal sepeda yang paling sering kamu kayuh dan paling banyak menyimpan bekas perjalanan.",
       excerpt:
@@ -753,7 +753,7 @@ export const INITIAL_DB: DatabaseState = {
       sizes: ["S", "M", "L", "XL", "XXL"],
       impactNote: "Rp 25.000 / pcs disalurkan ke For Rest Forest",
       description:
-        "Jersey dry-fit breathable dengan aksen ungu-lime khas PedalPol, 3 kantong belakang, dan strip reflektif aman untuk Rabo-Rabo & Sporty Edition.",
+        "Jersey dry-fit breathable dengan aksen ungu-lime khas PedalPol, 3 kantong belakang, dan strip reflektif aman untuk Raboo-Raboo & Sporty Edition.",
       artKey: "jersey-sporty",
       sortOrder: 1,
     },
@@ -801,7 +801,7 @@ export const INITIAL_DB: DatabaseState = {
       sizes: ["1 Pack (6 Stiker)"],
       impactNote: "Tahan Hujan & UV • Buat Frame & Helm",
       description:
-        "Satu paket berisi 6 stiker vinyl tahan air: Logo PEDAL POL, Sunday Morning Pol, Rabo-Rabo, For Rest Forest, Budak Korporat Escape, dan 26er Club.",
+        "Satu paket berisi 6 stiker vinyl tahan air: Logo PEDAL POL, Sunday Morning Pol, Raboo-Raboo, For Rest Forest, Budak Korporat Escape, dan 26er Club.",
       artKey: "sticker-pack",
       sortOrder: 4,
     },
@@ -826,7 +826,7 @@ export const INITIAL_DB: DatabaseState = {
   storySubmissions: [
     {
       id: "sub-demo-1",
-      title: "Pertama Kali Ikut Rabo-Rabo Pakai Sepeda Lipat 16 Inch",
+      title: "Pertama Kali Ikut Raboo-Raboo Pakai Sepeda Lipat 16 Inch",
       author: "@farhan.fold",
       cat: "cerita",
       body: "Awalnya ragu karena takut ketinggalan sama temen-temen Road Bike & Fixie. Ternyata pace-nya santai banget, road captain & sweeper selalu tunggu di lampu merah, dan pulangnya dapet banyak teman ngopi baru di Menteng!",

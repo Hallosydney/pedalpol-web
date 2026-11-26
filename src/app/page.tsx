@@ -108,7 +108,7 @@ export default async function HomePage() {
               <img
                 src="/logos/pedalpol.webp"
                 alt="Logo PedalPol"
-                className="w-14 h-14 object-cover border-2 border-[#14101C] shrink-0 bg-[#8E47EE]"
+                className="w-14 h-14 object-cover border-2 border-[#14101C] shrink-0 bg-[#14101C]"
               />
               <div className="min-w-0">
                 <div className="font-stamp text-[10px] font-bold uppercase text-[#6C2BD9]">

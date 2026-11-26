@@ -366,7 +366,7 @@ export function AgendaClient({
       <div className="flex flex-wrap gap-2 mb-7">
         {[
           { id: "all", label: "Semua Kategori" },
-          { id: "rabo", label: "Rabo-Rabo" },
+          { id: "rabo", label: "Raboo-Raboo" },
           { id: "sporty", label: "Sporty & Brick" },
           { id: "sunday", label: "Sunday Pol" },
           { id: "ngelayap", label: "Ngelayap" },
@@ -572,7 +572,7 @@ export function AgendaClient({
               01. WAJIB HELM &amp; LAMPU
             </div>
             <p className="text-[#362F42]">
-              <em>No Helmet, No Ride</em>. Khusus <strong>Rabo-Rabo</strong> malam hari,
+              <em>No Helmet, No Ride</em>. Khusus <strong>Raboo-Raboo</strong> malam hari,
               wajib pasang lampu depan &amp; belakang biar aman di jalanan Jakarta.
             </p>
           </div>

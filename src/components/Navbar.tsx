@@ -38,7 +38,7 @@ const NAV_ITEMS = [
     num: "03",
     href: "/agenda",
     label: "Agenda",
-    sub: "Rabo-Rabo, Sunday Pol & Join",
+    sub: "Raboo-Raboo, Sunday Pol & Join",
     accent: "#14101C",
     icon: Calendar,
   },
@@ -116,49 +116,18 @@ export function Navbar({ articleCount = 5 }: { articleCount?: number }) {
     <>
       <header className="sticky top-0 z-50 bg-[#F5F0E6]/95 backdrop-blur-md border-b-2 border-[#14101C]">
         <div className="max-w-6xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2.5">
-          {/* PEDAL POL Skewed Logo */}
+          {/* Official PEDAL POL Logo */}
           <Link
             href="/"
             onClick={handleMobileNav}
             className="flex items-center gap-2.5 group focus:outline-none text-left shrink-0"
             aria-label="Beranda PedalPol"
           >
-            <svg
-              width="106"
-              height="38"
-              viewBox="0 0 220 84"
-              className="transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-105"
-              aria-hidden="true"
-            >
-              <polygon
-                points="10,20 176,8 192,38 205,36 212,56 54,76 26,64"
-                fill="#8E47EE"
-                stroke="#14101C"
-                strokeWidth="5"
-                strokeLinejoin="round"
-              />
-              <polygon
-                points="14,23 173,12 188,41 201,39 207,53 55,71 29,61"
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth="3"
-                strokeDasharray="90 5 60 5 120 4 80"
-                strokeLinejoin="round"
-              />
-              <g transform="translate(36, 59) rotate(-7.5) skewX(-12)">
-                <text
-                  x="0"
-                  y="0"
-                  fill="#92FA66"
-                  fontFamily="Impact, Arial Black, sans-serif"
-                  fontSize="37"
-                  fontWeight="900"
-                  letterSpacing="1.2"
-                >
-                  PEDAL POL
-                </text>
-              </g>
-            </svg>
+            <img
+              src="/logos/pedalpol-logo.webp"
+              alt="Logo PEDAL POL"
+              className="h-9 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-105 drop-shadow-[2px_2px_0_#14101C]"
+            />
             <div className="hidden lg:flex flex-col leading-tight">
               <span className="font-stamp text-[11px] font-bold uppercase text-[#14101C]">
                 Menteng, Jakarta
@@ -395,7 +364,7 @@ export function Navbar({ articleCount = 5 }: { articleCount?: number }) {
                     KIRIM CERITAMU KE ZINE
                   </div>
                   <div className="font-stamp text-[10px] text-white/85 mt-1">
-                    Rabo-Rabo, Bike Check &amp; Ngelayap
+                    Raboo-Raboo, Bike Check &amp; Ngelayap
                   </div>
                 </div>
               </div>
@@ -411,7 +380,7 @@ export function Navbar({ articleCount = 5 }: { articleCount?: number }) {
                   <img
                     src="/logos/pedalpol.webp"
                     alt="PedalPol"
-                    className="w-8 h-8 object-cover border-2 border-[#14101C] bg-[#8E47EE]"
+                    className="w-8 h-8 object-cover border-2 border-[#14101C] bg-[#14101C]"
                   />
                   <img
                     src="/logos/bikebaik.webp"

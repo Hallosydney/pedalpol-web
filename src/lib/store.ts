@@ -207,7 +207,7 @@ export async function createRide(input: {
   const id = `${slugify(input.title)}-${Date.now().toString(36).slice(-4)}`;
   const status: RideStatus = input.status || "upcoming";
   const accentMap: Record<RideCategory, { bg: string; fg: string; label: string }> = {
-    rabo: { bg: "#14101C", fg: "#92FA66", label: "RABO-RABO" },
+    rabo: { bg: "#14101C", fg: "#92FA66", label: "RABOO-RABOO" },
     sporty: { bg: "#8E47EE", fg: "#FFFFFF", label: "SPORTY & BRICK" },
     sunday: { bg: "#92FA66", fg: "#14101C", label: "SUNDAY POL" },
     ngelayap: { bg: "#176B3F", fg: "#92FA66", label: "NGELAYAP" },

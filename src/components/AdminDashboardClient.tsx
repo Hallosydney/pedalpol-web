@@ -740,7 +740,7 @@ export function AdminDashboardClient({
                 required
                 value={nrTitle}
                 onChange={(e) => setNrTitle(e.target.value)}
-                placeholder="Judul Agenda (cth. Rabo-Rabo Night Roll #43)"
+                placeholder="Judul Agenda (cth. Raboo-Raboo Night Roll #43)"
                 className="w-full px-3 py-2 bg-white border-2 border-[#14101C] text-xs"
               />
               <div className="grid grid-cols-2 gap-2">
@@ -749,7 +749,7 @@ export function AdminDashboardClient({
                   onChange={(e) => setNrCat(e.target.value as RideCategory)}
                   className="px-2.5 py-2 bg-white border-2 border-[#14101C] text-xs font-stamp"
                 >
-                  <option value="rabo">Rabo-Rabo</option>
+                  <option value="rabo">Raboo-Raboo</option>
                   <option value="sporty">Sporty &amp; Brick</option>
                   <option value="sunday">Sunday Pol</option>
                   <option value="ngelayap">Ngelayap</option>

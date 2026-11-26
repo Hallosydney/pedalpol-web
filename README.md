@@ -9,7 +9,7 @@ Dibangun dengan **Next.js (App Router) + TypeScript + Tailwind CSS + Supabase (P
 ## Fitur Utama (Fase 1 / MVP Siap Produksi)
 
 1. **Beranda (`/`)**
-   - Hero Poster + **Interactive Sticker Wall** (stiker asli *Sunday Morning Pol*, logo *PedalPol*, *Rabo-Rabo*, *For Rest Forest*, dan tombol `+ Tempel Stiker` memunculkan logo `@bike2ngonten` & `@bikebaik.dijalan`).
+   - Hero Poster + **Interactive Sticker Wall** (stiker asli *Sunday Morning Pol*, logo *PedalPol*, *Raboo-Raboo*, *For Rest Forest*, dan tombol `+ Tempel Stiker` memunculkan logo `@bike2ngonten` & `@bikebaik.dijalan`).
    - **Next Upcoming Ride Strip** (jumlah riders real-time dari database).
    - **3 Komunitas Gandeng** dengan animasi rantai sepeda kinetik.
    - **Strip Film 35mm Bergerak** menampilkan 6 foto asli + video Reels Sudirman.

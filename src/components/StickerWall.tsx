@@ -143,7 +143,7 @@ export function HomeHero() {
             </h1>
             <p className="text-base text-[#362F42] max-w-xl leading-relaxed mb-7">
               Ruang cerita, arsip rute, dan rumah digital 50–100+ pesepeda lintas genre.
-              Dari <strong>Rabo-Rabo</strong> malam hari, <strong>Sporty Edition</strong>{" "}
+              Dari <strong>Raboo-Raboo</strong> malam hari, <strong>Sporty Edition</strong>{" "}
               Sabtu, <strong>Sunday Morning Pol</strong>, sampai catatan{" "}
               <strong>Ngelayap</strong> untuk menginspirasi pesepeda di seluruh Indonesia.
             </p>
@@ -238,61 +238,32 @@ export function HomeHero() {
                 />
               </div>
 
-              {/* Sticker 2: PEDAL POL Skewed Badge */}
+              {/* Sticker 2: REAL OFFICIAL PEDAL POL Logo */}
               <div
                 ref={attachDrag}
                 className="sticker-item animate-float-delay absolute"
                 style={{
-                  left: "156px",
+                  left: "152px",
                   top: "186px",
-                  ["--rot" as string]: "4deg",
+                  ["--rot" as string]: "3deg",
                 }}
               >
-                <svg
-                  width="174"
-                  height="72"
-                  viewBox="0 0 220 84"
-                  aria-label="Stiker Logo Pedal Pol"
-                >
-                  <polygon
-                    points="10,20 176,8 192,38 205,36 212,56 54,76 26,64"
-                    fill="#8E47EE"
-                    stroke="#14101C"
-                    strokeWidth="5"
-                    strokeLinejoin="round"
-                  />
-                  <polygon
-                    points="14,23 173,12 188,41 201,39 207,53 55,71 29,61"
-                    fill="none"
-                    stroke="#FFFFFF"
-                    strokeWidth="3"
-                    strokeDasharray="85 5 55 5 110 4 70"
-                    strokeLinejoin="round"
-                  />
-                  <g transform="translate(36, 59) rotate(-7.5) skewX(-12)">
-                    <text
-                      x="0"
-                      y="0"
-                      fill="#92FA66"
-                      fontFamily="Impact, Arial Black, sans-serif"
-                      fontSize="37"
-                      fontWeight="900"
-                      letterSpacing="1.2"
-                    >
-                      PEDAL POL
-                    </text>
-                  </g>
-                </svg>
+                <img
+                  src="/logos/pedalpol-logo.webp"
+                  alt="Stiker Logo Resmi Pedal Pol"
+                  draggable={false}
+                  className="w-40 sm:w-44 h-auto select-none pointer-events-none drop-shadow-[3px_4px_0_#14101C]"
+                />
               </div>
 
-              {/* Sticker 3: RABO-RABO */}
+              {/* Sticker 3: RABOO-RABOO */}
               <div
                 ref={attachDrag}
                 className="sticker-item absolute"
                 style={{ left: "22px", top: "260px", transform: "rotate(-6deg)" }}
               >
                 <div className="px-3.5 py-2 bg-[#14101C] text-[#92FA66] border-2 border-white font-stamp text-xs font-bold uppercase shadow-md">
-                  <div>★ RABO-RABO</div>
+                  <div>★ RABOO-RABOO</div>
                   <div className="text-[10px] text-[#F5F0E6]">NIGHT RIDE • MENTENG</div>
                 </div>
               </div>
@@ -401,7 +372,7 @@ export function HomeHero() {
             <div key={dup} className="flex items-center">
               <span className="mx-4">ZINE PEDALPOL</span>
               <span className="text-[#8E47EE]">✦</span>
-              <span className="mx-4">RABO-RABO NIGHT RIDE</span>
+              <span className="mx-4">RABOO-RABOO NIGHT RIDE</span>
               <span className="text-[#F5F0E6]">✦</span>
               <span className="mx-4">PEDALPOL SPORTY EDITION</span>
               <span className="text-[#8E47EE]">✦</span>
