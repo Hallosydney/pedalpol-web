@@ -6,8 +6,11 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const authenticated = await isAdminAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ authenticated: false });
+  }
   return NextResponse.json({
-    authenticated,
+    authenticated: true,
     storageMode: getStorageMode(),
   });
 }

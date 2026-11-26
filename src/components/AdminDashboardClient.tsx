@@ -516,15 +516,6 @@ export function AdminDashboardClient({
               {loginBusy ? "Memverifikasi..." : "Masuk Dashboard Admin →"}
             </button>
           </form>
-          <div className="mt-5 pt-4 border-t border-dashed border-[#14101C]/35 font-stamp text-[10px] text-[#5B5269]">
-            MODE STORAGE:{" "}
-            <strong className="text-[#14101C] uppercase">
-              {storageMode === "supabase" ? "Supabase PostgreSQL" : "Local JSON DB (Dev)"}
-            </strong>
-            <br />
-            Password default dev: <code>pedalpol2026</code> (ubah lewat{" "}
-            <code>ADMIN_PASSWORD</code> di <code>.env.local</code> / Vercel).
-          </div>
         </div>
       </section>
     );
