@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AgendaClient } from "@/components/AgendaClient";
-import { listRides } from "@/lib/store";
+import { getViewerRiderTokenHash } from "@/lib/auth";
+import { listRidesForViewer } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,11 @@ export default async function AgendaPage({
 }: {
   searchParams: Promise<{ tab?: string; ride?: string }>;
 }) {
-  const [rides, sp] = await Promise.all([listRides(), searchParams]);
+  const viewerHash = await getViewerRiderTokenHash();
+  const [rides, sp] = await Promise.all([
+    listRidesForViewer(viewerHash),
+    searchParams,
+  ]);
   const initialTab = sp.tab === "archive" ? "archive" : "upcoming";
   const initialOpenRideId = sp.ride || null;
 

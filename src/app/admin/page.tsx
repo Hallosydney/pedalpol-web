@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AdminDashboardClient } from "@/components/AdminDashboardClient";
-import { isAdminAuthenticated } from "@/lib/auth";
+import { isAdminAuthenticated, isUsingDefaultAdminSecurity } from "@/lib/auth";
 import {
   getSiteSettings,
   getStorageMode,
@@ -8,7 +8,7 @@ import {
   listCollabInquiries,
   listDocItems,
   listMerchItems,
-  listRides,
+  listRidesForViewer,
   listStorySubmissions,
 } from "@/lib/store";
 
@@ -22,12 +22,14 @@ export const metadata: Metadata = {
 export default async function AdminPage() {
   const authed = await isAdminAuthenticated();
   const storageMode = getStorageMode();
+  const usingDefaultSecurity = isUsingDefaultAdminSecurity();
 
   if (!authed) {
     return (
       <AdminDashboardClient
         initialAuthenticated={false}
         storageMode={storageMode}
+        usingDefaultSecurity={usingDefaultSecurity}
         initialRides={[]}
         initialArticles={[]}
         initialDocs={[]}
@@ -41,7 +43,7 @@ export default async function AdminPage() {
 
   const [rides, articles, docs, merch, submissions, inquiries, settings] =
     await Promise.all([
-      listRides(),
+      listRidesForViewer(null),
       listArticles(),
       listDocItems(),
       listMerchItems(),
@@ -54,6 +56,7 @@ export default async function AdminPage() {
     <AdminDashboardClient
       initialAuthenticated={true}
       storageMode={storageMode}
+      usingDefaultSecurity={usingDefaultSecurity}
       initialRides={rides}
       initialArticles={articles}
       initialDocs={docs}

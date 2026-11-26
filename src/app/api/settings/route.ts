@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/auth";
 import { getSiteSettings, updateSiteSettings } from "@/lib/store";
+import { isSameOriginRequest } from "@/lib/validation";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,9 @@ export async function GET() {
 }
 
 export async function PATCH(request: Request) {
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -17,10 +21,12 @@ export async function PATCH(request: Request) {
     whatsappAdmin?: string;
     treeCount?: number;
   };
-  const cleanWa = body.whatsappAdmin?.replace(/[^0-9]/g, "");
+  const cleanWa = body.whatsappAdmin?.replace(/[^0-9]/g, "").slice(0, 18);
   const settings = await updateSiteSettings({
-    ...(cleanWa ? { whatsappAdmin: cleanWa } : {}),
-    ...(typeof body.treeCount === "number" && body.treeCount >= 0
+    ...(cleanWa && cleanWa.length >= 9 ? { whatsappAdmin: cleanWa } : {}),
+    ...(typeof body.treeCount === "number" &&
+    Number.isFinite(body.treeCount) &&
+    body.treeCount >= 0
       ? { treeCount: Math.floor(body.treeCount) }
       : {}),
   });

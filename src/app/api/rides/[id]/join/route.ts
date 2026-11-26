@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
+import { getOrIssueRiderTokenHash, getViewerRiderTokenHash } from "@/lib/auth";
 import { checkRateLimit, hashClientIp } from "@/lib/rateLimit";
-import { joinRide, leaveRide, listRides } from "@/lib/store";
+import { joinRide, leaveRide, listRidesForViewer } from "@/lib/store";
+import { isSameOriginRequest, sanitizeText } from "@/lib/validation";
 
 export async function POST(
   request: Request,
   context: { params: Promise<{ id: string }> }
 ) {
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   const { id } = await context.params;
   const ipHash = hashClientIp(request);
 
@@ -20,28 +25,33 @@ export async function POST(
     name?: string;
     bike?: string;
     note?: string;
-    deviceToken?: string;
   } | null;
 
-  if (!body?.name?.trim() || !body?.deviceToken?.trim()) {
+  const cleanName = sanitizeText(body?.name, 60);
+  if (!cleanName) {
     return NextResponse.json(
       { error: "Nama / @username IG wajib diisi." },
       { status: 400 }
     );
   }
 
+  const riderTokenHash = await getOrIssueRiderTokenHash();
+
   try {
     const result = await joinRide({
       rideId: id,
-      name: body.name,
-      bike: body.bike || "Fixie",
-      note: body.note,
-      deviceToken: body.deviceToken,
+      name: cleanName,
+      bike: sanitizeText(body?.bike, 40) || "Fixie",
+      note: sanitizeText(body?.note, 220) || undefined,
+      deviceToken: riderTokenHash,
       ipHash,
     });
-    const rides = await listRides();
+    const rides = await listRidesForViewer(riderTokenHash);
     const ride = rides.find((r) => r.id === id);
-    return NextResponse.json({ ...result, ride }, { status: 201 });
+    return NextResponse.json(
+      { alreadyJoined: result.alreadyJoined, ride },
+      { status: 201 }
+    );
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : "Gagal join agenda." },
@@ -54,17 +64,21 @@ export async function DELETE(
   request: Request,
   context: { params: Promise<{ id: string }> }
 ) {
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   const { id } = await context.params;
-  const body = (await request.json().catch(() => null)) as {
-    deviceToken?: string;
-  } | null;
+  const riderTokenHash = await getViewerRiderTokenHash();
 
-  if (!body?.deviceToken?.trim()) {
-    return NextResponse.json({ error: "Device token wajib." }, { status: 400 });
+  if (!riderTokenHash) {
+    return NextResponse.json(
+      { error: "Sesi rider tidak ditemukan." },
+      { status: 400 }
+    );
   }
 
-  await leaveRide(id, body.deviceToken);
-  const rides = await listRides();
+  await leaveRide(id, riderTokenHash);
+  const rides = await listRidesForViewer(riderTokenHash);
   const ride = rides.find((r) => r.id === id);
   return NextResponse.json({ ok: true, ride });
 }

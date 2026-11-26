@@ -3,13 +3,15 @@ import { AllBikesDeck } from "@/components/AllBikesDeck";
 import { ArticleCoverArt } from "@/components/ArtIllustrations";
 import { HomeFilmstrip } from "@/components/HomeFilmstrip";
 import { HomeHero } from "@/components/StickerWall";
-import { listArticles, listDocItems, listRides } from "@/lib/store";
+import { getViewerRiderTokenHash } from "@/lib/auth";
+import { listArticles, listDocItems, listRidesForViewer } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  const viewerHash = await getViewerRiderTokenHash();
   const [rides, articles, docs] = await Promise.all([
-    listRides(),
+    listRidesForViewer(viewerHash),
     listArticles(),
     listDocItems(),
   ]);

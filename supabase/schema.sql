@@ -175,8 +175,10 @@ alter table public.story_submissions enable row level security;
 alter table public.collab_inquiries enable row level security;
 alter table public.site_settings enable row level security;
 
+-- Catatan keamanan: ride_riders menyimpan device_token (hash) & ip_hash sehingga
+-- hanya dibaca oleh server Next.js via SUPABASE_SERVICE_ROLE_KEY dan disanitasi
+-- sebelum dikirim ke browser publik.
 create policy "Public read rides" on public.rides for select using (true);
-create policy "Public read ride_riders" on public.ride_riders for select using (true);
 create policy "Public read ride_feedbacks" on public.ride_feedbacks for select using (true);
 create policy "Public read published articles" on public.articles for select using (published = true);
 create policy "Public read doc_items" on public.doc_items for select using (true);

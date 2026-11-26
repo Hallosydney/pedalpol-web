@@ -1,20 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMotion } from "@/components/MotionProvider";
-import {
-  getOrCreateDeviceToken,
-  getSavedRiderProfile,
-  saveRiderProfile,
-} from "@/lib/device";
+import { getSavedRiderProfile, saveRiderProfile } from "@/lib/device";
 import type { Ride, RideCategory, RideStatus } from "@/lib/types";
-
-const subscribeStorage = (cb: () => void) => {
-  window.addEventListener("storage", cb);
-  return () => window.removeEventListener("storage", cb);
-};
-const getEmptySnapshot = () => "";
 
 function renderRiderName(name: string) {
   if (name.startsWith("@") && name.length > 1) {
@@ -70,13 +60,6 @@ export function AgendaClient({
   const [statusTab, setStatusTab] = useState<RideStatus>(initialTab);
   const [catFilter, setCatFilter] = useState<"all" | RideCategory>("all");
 
-  // Hydration-safe deviceToken from localStorage
-  const deviceToken = useSyncExternalStore(
-    subscribeStorage,
-    getOrCreateDeviceToken,
-    getEmptySnapshot
-  );
-
   // Modal state
   const [activeRideId, setActiveRideId] = useState<string | null>(initialOpenRideId);
   const [modalTab, setModalTab] = useState<"info" | "riders">("info");
@@ -127,10 +110,7 @@ export function AgendaClient({
     [rides, activeRideId]
   );
 
-  const findMyEntry = (ride: Ride) => {
-    if (!deviceToken) return null;
-    return ride.riders.find((r) => r.deviceToken === deviceToken) || null;
-  };
+  const findMyEntry = (ride: Ride) => ride.riders.find((r) => r.isMe) || null;
 
   const openModal = (rideId: string, tab: "info" | "riders" = "info") => {
     const saved = getSavedRiderProfile();
@@ -153,7 +133,6 @@ export function AgendaClient({
     if (!activeRide || !joinHandle.trim()) return;
     setJoinBusy(true);
     setJoinError("");
-    const tok = deviceToken || getOrCreateDeviceToken();
     try {
       const res = await fetch(`/api/rides/${encodeURIComponent(activeRide.id)}/join`, {
         method: "POST",
@@ -162,7 +141,6 @@ export function AgendaClient({
           name: joinHandle.trim(),
           bike: joinBike,
           note: joinNote.trim(),
-          deviceToken: tok,
         }),
       });
       const data = await res.json();
@@ -181,13 +159,10 @@ export function AgendaClient({
   };
 
   const handleLeave = async (rideId: string) => {
-    if (!deviceToken) return;
     setJoinBusy(true);
     try {
       const res = await fetch(`/api/rides/${encodeURIComponent(rideId)}/join`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ deviceToken }),
       });
       const data = await res.json();
       if (res.ok && data.ride) replaceRide(data.ride);
@@ -481,7 +456,7 @@ export function AgendaClient({
                         </div>
                         <div className="flex flex-wrap gap-1 font-stamp">
                           {preview.map((r) => {
-                            const isMe = deviceToken && r.deviceToken === deviceToken;
+                            const isMe = Boolean(r.isMe);
                             return (
                               <span
                                 key={r.id}
@@ -854,7 +829,7 @@ export function AgendaClient({
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {activeRide.riders.slice(0, 6).map((r, i) => {
-                          const isMe = deviceToken && r.deviceToken === deviceToken;
+                          const isMe = Boolean(r.isMe);
                           return (
                             <span
                               key={r.id}
@@ -927,7 +902,7 @@ export function AgendaClient({
                         </div>
                       ) : (
                         filteredModalRiders.map((r) => {
-                          const isMe = deviceToken && r.deviceToken === deviceToken;
+                          const isMe = Boolean(r.isMe);
                           return (
                             <div
                               key={r.id}

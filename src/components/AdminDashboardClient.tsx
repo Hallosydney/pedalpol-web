@@ -14,12 +14,14 @@ import type {
   SiteSettings,
   StorySubmission,
 } from "@/lib/types";
+import { sanitizeCsvCell } from "@/lib/validation";
 
 type AdminTab = "agenda" | "zine" | "docs" | "merch" | "inbox";
 
 interface AdminProps {
   initialAuthenticated: boolean;
   storageMode: "supabase" | "local";
+  usingDefaultSecurity: boolean;
   initialRides: Ride[];
   initialArticles: Article[];
   initialDocs: DocItem[];
@@ -32,6 +34,7 @@ interface AdminProps {
 export function AdminDashboardClient({
   initialAuthenticated,
   storageMode,
+  usingDefaultSecurity,
   initialRides,
   initialArticles,
   initialDocs,
@@ -282,11 +285,11 @@ export function AdminDashboardClient({
     const header = ["No", "Nama / IG", "Jenis Sepeda", "Catatan", "Check-In", "Waktu Join"];
     const rows = ride.riders.map((r, i) => [
       String(i + 1),
-      `"${r.name.replace(/"/g, '""')}"`,
-      `"${r.bike.replace(/"/g, '""')}"`,
-      `"${(r.note || "").replace(/"/g, '""')}"`,
+      sanitizeCsvCell(r.name),
+      sanitizeCsvCell(r.bike),
+      sanitizeCsvCell(r.note || ""),
       r.checkedIn ? "SUDAH" : "BELUM",
-      r.createdAt,
+      sanitizeCsvCell(r.createdAt),
     ]);
     const csv = [header.join(","), ...rows.map((row) => row.join(","))].join("\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -562,6 +565,15 @@ export function AdminDashboardClient({
           Keluar Admin
         </button>
       </div>
+
+      {usingDefaultSecurity && (
+        <div className="mb-6 p-3.5 bg-[#FF5B37]/15 border-2 border-[#FF5B37] font-stamp text-xs text-[#14101C]">
+          <strong>⚠ PENGINGAT KEAMANAN PRODUKSI:</strong> Panel Admin masih memakai
+          password/secret default. Sebelum rilis ke publik, pastikan kamu sudah mengisi{" "}
+          <code>ADMIN_PASSWORD</code>, <code>ADMIN_SESSION_SECRET</code>, dan{" "}
+          <code>IP_HASH_SALT</code> di <strong>Vercel → Environment Variables</strong>.
+        </div>
+      )}
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-2 mb-8">

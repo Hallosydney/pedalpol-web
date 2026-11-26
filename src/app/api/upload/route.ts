@@ -4,24 +4,12 @@ import path from "path";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
-
-const ALLOWED_TYPES = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "video/mp4",
-  "video/quicktime",
-]);
-
-const EXT_MAP: Record<string, string> = {
-  "image/jpeg": ".jpg",
-  "image/png": ".png",
-  "image/webp": ".webp",
-  "video/mp4": ".mp4",
-  "video/quicktime": ".mov",
-};
+import { detectMediaFromMagicBytes, isSameOriginRequest } from "@/lib/validation";
 
 export async function POST(request: Request) {
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -32,13 +20,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "File tidak ditemukan." }, { status: 400 });
   }
 
-  if (!ALLOWED_TYPES.has(file.type)) {
-    return NextResponse.json(
-      { error: "Format file harus JPG, PNG, WebP, atau MP4." },
-      { status: 400 }
-    );
-  }
-
   if (file.size > 20 * 1024 * 1024) {
     return NextResponse.json(
       { error: "Ukuran file maksimal 20 MB." },
@@ -46,15 +27,22 @@ export async function POST(request: Request) {
     );
   }
 
-  const ext = EXT_MAP[file.type] || ".bin";
-  const fileName = `pp-${Date.now()}-${crypto.randomBytes(4).toString("hex")}${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
+  const detected = detectMediaFromMagicBytes(buffer);
+  if (!detected) {
+    return NextResponse.json(
+      { error: "Format file tidak valid. Hanya JPG, PNG, WebP, MP4, atau MOV asli yang diizinkan." },
+      { status: 400 }
+    );
+  }
+
+  const fileName = `pp-${Date.now()}-${crypto.randomBytes(4).toString("hex")}${detected.ext}`;
 
   const sb = getSupabaseAdmin();
   if (sb) {
     const { error } = await sb.storage
       .from("docs")
-      .upload(fileName, buffer, { contentType: file.type, upsert: false });
+      .upload(fileName, buffer, { contentType: detected.mime, upsert: false });
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }

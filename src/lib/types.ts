@@ -11,6 +11,7 @@ export interface RideRider {
   bike: string;
   note?: string;
   deviceToken?: string;
+  isMe?: boolean;
   checkedIn: boolean;
   createdAt: string;
 }

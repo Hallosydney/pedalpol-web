@@ -63,6 +63,32 @@ export function getStorageMode(): "supabase" | "local" {
   return getSupabaseAdmin() ? "supabase" : "local";
 }
 
+export function sanitizeRideForViewer(
+  ride: Ride,
+  viewerTokenHash: string | null
+): Ride {
+  return {
+    ...ride,
+    riders: ride.riders.map((r) => ({
+      id: r.id,
+      rideId: r.rideId,
+      name: r.name,
+      bike: r.bike,
+      note: r.note,
+      isMe: Boolean(viewerTokenHash && r.deviceToken === viewerTokenHash),
+      checkedIn: r.checkedIn,
+      createdAt: r.createdAt,
+    })),
+  };
+}
+
+export async function listRidesForViewer(
+  viewerTokenHash: string | null
+): Promise<Ride[]> {
+  const rides = await listRides();
+  return rides.map((ride) => sanitizeRideForViewer(ride, viewerTokenHash));
+}
+
 function slugify(text: string): string {
   return (
     text

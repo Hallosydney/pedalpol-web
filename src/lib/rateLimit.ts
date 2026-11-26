@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
 const ipBuckets = new Map<string, number[]>();
+const MAX_BUCKET_KEYS = 2000;
 
 export function extractClientIp(request: Request): string {
   const xff = request.headers.get("x-forwarded-for");
@@ -19,8 +20,17 @@ export function hashClientIp(request: Request): string {
   return crypto.createHash("sha256").update(`${salt}:${ip}`).digest("hex").slice(0, 24);
 }
 
+function pruneStaleBuckets(now: number, windowMs: number) {
+  if (ipBuckets.size <= MAX_BUCKET_KEYS) return;
+  for (const [k, times] of ipBuckets.entries()) {
+    const active = times.filter((t) => now - t < windowMs);
+    if (active.length === 0) ipBuckets.delete(k);
+    else ipBuckets.set(k, active);
+  }
+}
+
 /**
- * Sliding-window rate limit per hashed IP + action key.
+ * Bounded sliding-window rate limit per hashed IP + action key.
  * Returns true if allowed, false if rate-limited.
  */
 export function checkRateLimit(
@@ -29,6 +39,7 @@ export function checkRateLimit(
   windowMs = 60_000
 ): boolean {
   const now = Date.now();
+  pruneStaleBuckets(now, windowMs);
   const timestamps = (ipBuckets.get(key) || []).filter((t) => now - t < windowMs);
   if (timestamps.length >= maxRequests) {
     ipBuckets.set(key, timestamps);
