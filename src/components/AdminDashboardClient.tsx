@@ -516,6 +516,11 @@ export function AdminDashboardClient({
               {loginBusy ? "Memverifikasi..." : "Masuk Dashboard Admin →"}
             </button>
           </form>
+          {usingDefaultSecurity && (
+            <div className="mt-4 pt-3 border-t border-dashed border-[#14101C]/35 font-stamp text-[10px] text-[#5B5269]">
+              Password default: <code className="text-[#14101C] font-bold">pedalpol2026</code>
+            </div>
+          )}
         </div>
       </section>
     );
@@ -556,15 +561,6 @@ export function AdminDashboardClient({
           Keluar Admin
         </button>
       </div>
-
-      {usingDefaultSecurity && (
-        <div className="mb-6 p-3.5 bg-[#FF5B37]/15 border-2 border-[#FF5B37] font-stamp text-xs text-[#14101C]">
-          <strong>⚠ PENGINGAT KEAMANAN PRODUKSI:</strong> Panel Admin masih memakai
-          password/secret default. Sebelum rilis ke publik, pastikan kamu sudah mengisi{" "}
-          <code>ADMIN_PASSWORD</code>, <code>ADMIN_SESSION_SECRET</code>, dan{" "}
-          <code>IP_HASH_SALT</code> di <strong>Vercel → Environment Variables</strong>.
-        </div>
-      )}
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-2 mb-8">
